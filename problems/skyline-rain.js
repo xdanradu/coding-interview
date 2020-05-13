@@ -5,7 +5,8 @@ Problem:
 
 Solution approach:
     Answer to the question: for a given building index, does it store water above the building or not?
-    Use memoization for O(n): for each index compute the maximum on its left side and on its right side sub arrays and store them into two arrays maxLeft and maxRight
+    Use memoization for O(n): for each index compute the maximum on its left side and on its right side sub arrays
+    and store them into two arrays maxLeft and maxRight
 */
 
 let b1 = { width: 2, height: 1 };
@@ -42,7 +43,7 @@ function getLeftMax(buildings) {
 function getRightMax(buildings) {
     let rightMax = [];
     rightMax[buildings.length-1] = 0;
-    for ( let i=buildings.length-2; i>=0; i-- ){
+    for (let i = buildings.length - 2; i >= 0; i--){
         if (rightMax[i+1] < buildings[i+1].height) {
             rightMax[i] = buildings[i+1].height;
         } else {
@@ -54,9 +55,9 @@ function getRightMax(buildings) {
 
 function getWaterCount(leftMax, rightMax, buildings) {
     let count = 0;
-    for ( let i=1; i < buildings.length-1; i++ ) {
-        if (leftMax[i]>=buildings[i].height && rightMax[i]>=buildings[i].height){
-            count+=(Math.min(leftMax[i], rightMax[i]) - buildings[i].height)*buildings[i].width;
+    for (let i = 1; i < buildings.length - 1; i++) {
+        if (leftMax[i] >= buildings[i].height && rightMax[i] >= buildings[i].height){
+            count += ( Math.min(leftMax[i], rightMax[i]) - buildings[i].height ) * buildings[i].width;
         }
     }
     return count;
@@ -66,4 +67,5 @@ let leftMax = getLeftMax(buildings);
 console.log(leftMax);
 let rightMax = getRightMax(buildings);
 console.log(rightMax);
+
 console.log(getWaterCount(leftMax, rightMax, buildings));
