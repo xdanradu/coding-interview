@@ -1,14 +1,11 @@
 /*
 Problem:
-A skyline is a collection of rectangles/buildings and a building is defined as a pair of (width, height)
-Question: Compute the water that can accumulate between buildings
-          See corresponding picture for a better understanding
-*/
+    A skyline is a collection of rectangles/buildings and a building is defined as a pair of (width, height)
+    Compute the water that can accumulate between buildings (see corresponding picture for a better understanding)
 
-/*
-Question to implement: for a given building index, does it store water above the building or not?
-Solution idea: for each index compute the maximum on its left side and on its right side sub arrays
-       and store them into two arrays maxLeft and maxRight - dynamic programming/memoization
+Solution approach:
+    Answer to the question: for a given building index, does it store water above the building or not?
+    Use memoization for O(n): for each index compute the maximum on its left side and on its right side sub arrays and store them into two arrays maxLeft and maxRight
 */
 
 let b1 = { width: 2, height: 1 };
@@ -22,13 +19,12 @@ let b8 = { width: 1, height: 1 };
 let buildings = [b1, b2, b3, b4, b5, b6, b7, b8];
 
 /*
-
- For the given example the expected result is 6
+For the given example the expected result is 6
     leftMax: [ 0, 1, 1, 2, 2, 2, 3, 3 ]
     rightMax: [ 3, 3, 3, 3, 3, 1, 1, 0 ]
 
- Time complexity: O(n)
- Space complexity: O(1)
+Time complexity: O(n)
+Space complexity: O(1)
 */
 
 function getLeftMax(buildings) {
