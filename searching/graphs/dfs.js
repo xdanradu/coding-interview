@@ -1,11 +1,11 @@
 //DFS: Depth First Search in a Graph
-
 function dfsSearch(rootNode, key){
   var seenNodes = [];
-  var nextNodes = [rootNode];//stack
+  var nextNodes = [rootNode];
 
   while(nextNodes.length != 0) {
-    var currentNode = nextNodes.pop();
+    var currentNode = nextNodes.pop();//stack
+    console.log(currentNode.key);
     if (currentNode.key === key){
       return currentNode;
     }
