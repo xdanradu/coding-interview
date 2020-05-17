@@ -31,6 +31,18 @@ function computeDimensions(matrix) {
     m = matrix[0].length;
 }
 
+function indexes(matrix) {
+    let result = getCopy(matrix);
+    n = matrix.length;
+    m = matrix[0].length;
+    for( let i = 0; i < n ; i++ ) {
+        for( let j = 0; j < m ; j++ ) {
+            let eval = i<j?'<':i==j>j?'=':'>';
+            result[i][j] = i+eval+j;
+        }
+    }
+    return result;
+}
 
 function show(matrix) {
     computeDimensions(matrix);
@@ -84,8 +96,20 @@ function shouldMark(i, j) {
                 }
                 break;
             }
-            case 'BELLOW-PRIMARY-BELLOW-SECONDARY': {
+            case 'BELOW-PRIMARY-BELOW-SECONDARY': {
                 if (i > j && i > m - j - 1) { 
+                    evaluation = true;
+                }
+                break;
+            }
+            case 'BELOW-PRIMARY-ABOVE-SECONDARY': {
+                if (i > j && i < m - j - 1) { 
+                    evaluation = true;
+                }
+                break;
+            }
+            case 'ABOVE-PRIMARY-BELOW-SECONDARY': {
+                if (i < j && i > m - j - 1) { 
                     evaluation = true;
                 }
                 break;
@@ -108,6 +132,13 @@ function shouldMark(i, j) {
                 }
                 break;
             }
+            case 'JUMP-ONE': {
+                if ( (i + j) % 2 == 0 ) { 
+                    // console.log(i+' '+j);
+                    evaluation = true;
+                }
+                break;
+            }
         }
     }
     return evaluation;
@@ -119,8 +150,14 @@ function display(matrix, features){
     console.table(show(matrix));
     FEATURES = [];
 }
-
-display(oddMatrix, ['PRIMARY', 'SECONDARY', 'CENTER', 'ABOVE-PRIMARY-ABOVE-SECONDARY', 'BELLOW-PRIMARY-BELLOW-SECONDARY']);
-// display(oddMatrix, ['PRIMARY', 'SECONDARY']);
-// display(oddMatrix, ['CENTER']);
-// display(evenMatrix, ['CENTER']);
+/*
+display(oddMatrix, [
+    'ABOVE-PRIMARY-ABOVE-SECONDARY', 
+    'BELOW-PRIMARY-BELOW-SECONDARY', 
+    'BELOW-PRIMARY-ABOVE-SECONDARY',
+    'ABOVE-PRIMARY-BELOW-SECONDARY'
+]);
+*/
+console.table(indexes(oddMatrix));
+// display(evenMatrix, ['PRIMARY', 'SECONDARY', 'CENTER', ]);
+//display(evenMatrix, ['JUMP-ONE']);
